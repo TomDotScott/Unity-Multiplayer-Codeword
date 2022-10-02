@@ -75,11 +75,12 @@ public class Client : Singleton<Client>
             switch (command)
             {
                 case NetworkEvent.Type.Connect:
-                    // TODO: SendToServer(new NetWelcome());
+                    // TODO: CREATE WELCOME MESSAGE CLASS SendToServer(new WelcomeMessage());
+                    Debug.Log("WE'RE CONNECTED! WOOHOO!");
                     break;
 
                 case NetworkEvent.Type.Data:
-                    // TODO: NetUtility.OnData(stream, default(NetworkConnection));
+                    NetUtility.OnData(stream, default(NetworkConnection));
                     break;
 
                 case NetworkEvent.Type.Disconnect:
@@ -106,12 +107,12 @@ public class Client : Singleton<Client>
 
     private void RegisterEvent()
     {
-        // TODO: NetUtility.KEEP_ALIVE += KeepAlive;
+        NetUtility.HEARTBEAT_CLIENT += KeepAlive;
     }
 
     private void UnregisterEvent()
     {
-        // TODO: NetUtility.KEEP_ALIVE -= KeepAlive;
+        NetUtility.HEARTBEAT_CLIENT -= KeepAlive;
     }
 
     private void KeepAlive(Message msg)

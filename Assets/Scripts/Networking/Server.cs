@@ -62,7 +62,7 @@ public class Server : Singleton<Server>
     {
         if(!m_isActive) return;
 
-        // KeepAlive();
+        HeartBeat();
 
         Driver.ScheduleUpdate().Complete();
         
@@ -112,8 +112,7 @@ public class Server : Singleton<Server>
                 switch (command)
                 {
                     case NetworkEvent.Type.Data:
-                        // TODO: CREATE THIS FUNCTION
-                        // NetUtility.OnData(stream, m_connections[i], this);
+                        NetUtility.OnData(stream, m_connections[i], this);
                         break;
                     case NetworkEvent.Type.Disconnect:
                         Debug.Log("Client disconnected from server!");
@@ -137,9 +136,20 @@ public class Server : Singleton<Server>
         // Loop through the connected clients, sending a network message
         foreach (var client in m_connections.Where(client => client.IsCreated))
         {
-            Debug.Log($"Sending {msg.Code} to: {client.InternalId}");
+            Debug.Log($"Sending {msg.MessageCode} to: {client.InternalId}");
 
             SendToClient(client, msg);
+        }
+    }
+
+
+    public void HeartBeat()
+    {
+        // Every x seconds, send a message to keep the connection alive
+        if (Time.time - m_lastKeepAlive > m_keepAliveTickRate)
+        {
+            m_lastKeepAlive = Time.time;
+            Broadcast(new HeartBeatMessage());
         }
     }
 

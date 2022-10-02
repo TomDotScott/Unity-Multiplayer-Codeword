@@ -3385,6 +3385,8 @@ GameObject:
   - component: {fileID: 1718763219}
   - component: {fileID: 1718763223}
   - component: {fileID: 1718763224}
+  - component: {fileID: 1718763226}
+  - component: {fileID: 1718763225}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -3488,6 +3490,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a112b60cc578cd641a910f42f49f95c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  GameServer: {fileID: 1718763225}
+  GameClient: {fileID: 1718763226}
   m_inputField: {fileID: 1427640802}
   m_animator: {fileID: 1718763224}
   GameMode: 0
@@ -3511,6 +3515,30 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1718763225
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1718763218}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f8159f9a8a283f4f8a8934cf944c0a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1718763226
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1718763218}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08ab7222122f51049b2cf0e749a6d54b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1823274059
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,9 +8,16 @@ public class GameUI : MonoBehaviour
 {
     public static GameUI Instance { get; private set; }
 
+    public Server GameServer;
+
+    public Client GameClient;
+
     [SerializeField] private TMPro.TMP_InputField m_inputField;
 
     [SerializeField] private Animator m_animator;
+
+    private String m_defaultIP = "127.0.0.1";
+    private ushort m_port = 6969;
 
     // Will be passed into the GameManager and Server to determine which logic the game should follow
     public enum eGameMode
@@ -33,6 +41,9 @@ void Start()
     {
         m_animator.SetTrigger("FadeMenus");
         GameMode = eGameMode.eSinglePlayer;
+
+        GameServer.Init(m_port);
+        GameClient.Init(m_defaultIP, m_port);
     }
 
     public void OnMultiplayerPressed()
@@ -50,6 +61,11 @@ void Start()
     public void OnHostPressed()
     {
         // TODO: Start hosting TCP/UDP server and wait for people to connect
+        GameServer.Init(m_port);
+
+        // When we host a game, we also want to connect ourselves...
+        GameClient.Init(m_defaultIP, m_port);
+
         Debug.Log("Host pressed!");
         m_animator.SetTrigger("HostMenu");
     }
@@ -57,6 +73,9 @@ void Start()
     public void OnConnectPressed()
     {
         // TODO: Have some additional logic to read from the IP Input and look for a TCP/UDP connection
+        String ipAddress = m_inputField.text;
+        GameClient.Init(ipAddress, 6969);
+
         Debug.Log("Connect pressed!");
     }
 
@@ -68,5 +87,7 @@ void Start()
     public void OnHostBackPressed()
     {
         m_animator.SetTrigger("HostBack");
+        GameServer.ShutDown();
+        GameClient.ShutDown();
     }
 }
