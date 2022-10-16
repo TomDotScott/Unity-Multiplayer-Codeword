@@ -33,9 +33,9 @@ public static class NetUtility
                 msg = new HeartBeatMessage(stream);
                 break;
             // TODO: 
-            //case Message.eMessageCode.WELCOME:
-            //    msg = new WelcomeMessage(stream);
-            //    break;
+            case Message.eMessageCode.WELCOME:
+                msg = new WelcomeMessage(stream);
+                break;
             //case Message.eMessageCode.START_GAME:
             //    msg = new StartGameMessage(stream);
             //    break;
@@ -46,7 +46,7 @@ public static class NetUtility
             //    msg = new RematchMessage(stream);
             //    break;
             default:
-                Debug.Log("Message received had no code... Was this a mistake?");
+                Debug.Log("Message received had a bad code... Was this a mistake?");
                 break;
         }
 

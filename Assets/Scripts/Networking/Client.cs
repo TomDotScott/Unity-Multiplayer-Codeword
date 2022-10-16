@@ -75,7 +75,7 @@ public class Client : Singleton<Client>
             switch (command)
             {
                 case NetworkEvent.Type.Connect:
-                    // TODO: CREATE WELCOME MESSAGE CLASS SendToServer(new WelcomeMessage());
+                    SendToServer(new WelcomeMessage());
                     Debug.Log("WE'RE CONNECTED! WOOHOO!");
                     break;
 
